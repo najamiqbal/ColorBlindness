@@ -58,7 +58,7 @@ public class UserHomeFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.color_cardview:
 
-                //startActivity(new Intent(getContext(), DetectColorActivity.class));
+                startActivity(new Intent(getContext(), DetectColorActivity.class));
                 break;
 
 
