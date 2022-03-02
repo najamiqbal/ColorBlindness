@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_dr"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/doctor_img" />
+
+        <TextView
+            android:id="@+id/txt_report_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@+id/img_dr"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/dr_name"
+            android:textColor="#262628"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_dr_specialization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_report_id"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/img_dr"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/short_bio"
+            android:textColor="#423A3A"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_draddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_dr_specialization"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/img_dr"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/dr_address"
+            android:textColor="#423A3A"
+            android:textSize="12sp" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/txt_draddress"
+            android:layout_marginTop="10dp"
+            android:background="#E1E1E1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_marginTop="8dp"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_dr_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_style"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:focusable="true"
+                android:fontFamily="@font/tajawal_regular"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/dr_mail"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btn_dr_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/button_style"
+                android:clickable="true"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_mobile"
+                android:drawablePadding="10dp"
+                android:focusable="true"
+                android:fontFamily="@font/tajawal_regular"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingStart="10dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="10dp"
+
+                android:paddingBottom="8dp"
+                android:text="@string/dr_call"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btn_dr_whatsapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/button_style"
+                android:clickable="true"
+                android:drawableStart="@drawable/whatsapp"
+                android:drawablePadding="10dp"
+                android:focusable="true"
+                android:fontFamily="@font/tajawal_regular"
+                android:layout_weight="1"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/dr_whatsapp"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

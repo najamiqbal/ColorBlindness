@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+
+        <TextView
+            android:id="@+id/txt_report_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/dr_name"
+            android:textColor="#262628"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_detai_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="Detail"
+            android:layout_alignParentEnd="true"
+            android:drawableRight="@drawable/ic_arrow_forward"
+            android:textColor="#262628"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/txt_dr_specialization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_report_id"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="Report Details:"
+            android:textColor="#7B1FA2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_draddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_dr_specialization"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/dr_address"
+            android:textColor="#423A3A"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_total_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_draddress"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/dr_address"
+            android:textColor="#423A3A"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/txt_report_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_total_result"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/dr_address"
+            android:textColor="#423A3A"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_report_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_report_status"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/tajawal_regular"
+            android:text="@string/dr_address"
+            android:textColor="#423A3A"
+            android:textSize="12sp" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/txt_report_date"
+            android:layout_marginTop="10dp"
+            android:background="#E1E1E1" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

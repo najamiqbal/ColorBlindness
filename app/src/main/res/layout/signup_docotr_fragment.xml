@@ -1,0 +1,196 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:padding="10dp">
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/iv_profile_photo_dr"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/applogo"
+            android:layout_centerHorizontal="true"/>
+
+
+
+        <LinearLayout
+            android:id="@+id/et_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/iv_profile_photo_dr"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/dr_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Name"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_style"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:inputType="text"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/hint_text"
+                />
+
+            <EditText
+                android:id="@+id/dr_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="3354******"
+                android:padding="10dp"
+                android:digits="0123456789+"
+                android:maxLength="10"
+                android:background="@drawable/edit_text_style"
+                android:drawableLeft="@drawable/ic_mobile"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/hint_text"
+                />
+            <EditText
+                android:id="@+id/dr_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Email"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_style"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/hint_text"
+                />
+            <EditText
+                android:id="@+id/dr_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Address"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_style"
+                android:drawableLeft="@drawable/ic_home"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/hint_text"
+                />
+            <EditText
+                android:id="@+id/dr_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_lock"
+                android:background="@drawable/edit_text_style"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:inputType="textPassword"
+                android:textColorHint="#B7B7B7"/>
+            <EditText
+                android:id="@+id/dr_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_lock"
+                android:background="@drawable/edit_text_style"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:inputType="textPassword"
+                android:textColorHint="#B7B7B7"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_gravity="center"
+                android:text="Profession Detail"
+                android:layout_marginTop="30dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:id="@+id/textCompanyInfo"/>
+
+
+            <EditText
+                android:id="@+id/dr_company_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Clinic address"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_style"
+                android:drawableLeft="@drawable/ic_home"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:inputType="text"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/hint_text"
+                />
+            <EditText
+                android:id="@+id/dr_specialization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Specialization?"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_style"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:inputType="text"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/hint_text"
+                />
+            <EditText
+                android:id="@+id/dr_company_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Short Bio"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_style"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:inputType="text"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/hint_text"
+                />
+
+            <Button
+                android:id="@+id/register_btn_dr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_style"
+                android:text="Register Now"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

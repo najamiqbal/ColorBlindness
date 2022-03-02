@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:id="@+id/scrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/tajawal_regular"
+                android:padding="6dp"
+                android:text="0/12"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txt_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/count"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="4dp"
+                android:layout_toEndOf="@+id/count"
+                android:fontFamily="@font/tajawal_regular"
+                android:padding="6dp"
+                android:text="@string/guide"
+                android:textAlignment="center"
+                android:textColor="#F35433"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:id="@+id/img_test"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_below="@+id/txt_guide"
+                android:scaleType="fitXY"
+                android:src="@drawable/ishihara_00"></ImageView>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <View
+        android:id="@+id/center_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/card_1"
+        android:background="#DCDCDC" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_below="@id/center_line"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/et_first_number"
+                android:layout_marginStart="12dp"
+                android:fontFamily="@font/tajawal_regular"
+                android:text="@string/first_number"
+                android:textColor="#292929"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_first_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/edit_text_style"
+                android:fontFamily="@font/tajawal_regular"
+                android:hint="Enter first number"
+                android:inputType="number"
+                android:padding="6dp"
+                android:maxLines="1"
+                android:maxLength="1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/center_line2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/et_first_number"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/txt_2nd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/center_line2"
+                android:layout_alignBaseline="@+id/et_2nd_number"
+                android:fontFamily="@font/tajawal_regular"
+                android:text="@string/second_number"
+                android:layout_marginStart="12dp"
+                android:textColor="#292929"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_2nd_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/center_line2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/edit_text_style"
+                android:fontFamily="@font/tajawal_regular"
+                android:hint="Enter 2nd number"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="6dp"
+                android:maxLength="1"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:background="@drawable/button_style"
+        android:layout_below="@id/card_2"
+        android:layout_margin="12dp"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Results"
+        android:background="@drawable/button_style"
+        android:layout_below="@id/card_2"
+        android:layout_margin="12dp"
+        android:visibility="gone"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>
+</ScrollView>
