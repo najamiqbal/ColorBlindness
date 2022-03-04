@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
 import org.json.JSONArray;
@@ -35,9 +36,9 @@ public class ForgetPassFragment extends Fragment
     Button btn_submit;
     EditText et_email;
     TextView tv_gologin;
-    String t_email="najamiqbal829@gmail.com";
+    String t_email="";
     private ProgressDialog pDialog;
-    String Isexist_url = "https://houseofsoftwares.com/color-blindness/Api.php?action=resetPassword";
+    String Isexist_url = "resetPassword";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -86,7 +87,7 @@ public class ForgetPassFragment extends Fragment
         Log.e("check1122", "mobile number" + t_email);
         pDialog.setMessage("Registring ...");
         pDialog.show();
-        StringRequest stringRequest=new StringRequest(Request.Method.POST,Isexist_url , new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, AppConstants.mainurl+Isexist_url , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

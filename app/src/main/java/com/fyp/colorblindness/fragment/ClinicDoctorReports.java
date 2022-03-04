@@ -23,6 +23,7 @@ import com.fyp.colorblindness.adapters.MyReportsAdapter;
 import com.fyp.colorblindness.adapters.PatientReportsAdapter;
 import com.fyp.colorblindness.models.ReportsModel;
 import com.fyp.colorblindness.models.UserModelClass;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.SharedPrefManager;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
@@ -42,7 +43,7 @@ public class ClinicDoctorReports extends Fragment {
     private ProgressDialog pDialog;
     PatientReportsAdapter mAdapter;
     String user_id="";
-    String getMyReportsUrl = "https://houseofsoftwares.com/color-blindness/Api.php?action=showReportsToDoctor";
+    String getMyReportsUrl = "showReportsToDoctor";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class ClinicDoctorReports extends Fragment {
     private void GetReports(String user_id) {
         pDialog.setMessage("please Wait....");
         pDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, getMyReportsUrl, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+getMyReportsUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response is", response.toString());

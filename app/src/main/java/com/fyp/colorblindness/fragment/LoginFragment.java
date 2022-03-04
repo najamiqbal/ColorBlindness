@@ -30,6 +30,7 @@ import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.activities.MainActivity;
 import com.fyp.colorblindness.activities.doctorMainActivity;
 import com.fyp.colorblindness.models.UserModelClass;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.SharedPrefManager;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
@@ -46,7 +47,7 @@ View view;
     EditText et_email, et_pass;
     Button btn_login;
     String t_email, t_password;
-    String Login_url = "https://houseofsoftwares.com/color-blindness/Api.php?action=login";
+    String Login_url = "login";
     private ProgressDialog pDialog;
     UserModelClass userModelClass = new UserModelClass();
     @Nullable
@@ -127,7 +128,7 @@ View view;
     private void UserLogin(final String t_email, final String t_pass) {
         pDialog.setMessage("Login please Wait....");
         pDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Login_url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+Login_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response is", response.toString());

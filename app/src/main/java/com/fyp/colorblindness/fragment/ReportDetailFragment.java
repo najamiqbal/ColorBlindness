@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
 import org.json.JSONArray;
@@ -38,7 +39,7 @@ public class ReportDetailFragment extends Fragment implements View.OnClickListen
     TextView tv_ans1, tv_ans2, tv_ans3, tv_ans4, tv_ans5, tv_ans6, tv_ans7, tv_ans8, tv_ans9, tv_ans10, tv_ans11, tv_ans12;
     private ProgressDialog pDialog;
     CardView cardViewdoctor;
-    String GetdoctorDetailURL = "https://houseofsoftwares.com/color-blindness/Api.php?action=getDoctorByReport";
+    String GetdoctorDetailURL = "getDoctorByReport";
 
     @Nullable
     @Override
@@ -57,7 +58,7 @@ public class ReportDetailFragment extends Fragment implements View.OnClickListen
         pDialog.setMessage("Wait....");
         pDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, GetdoctorDetailURL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+GetdoctorDetailURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();

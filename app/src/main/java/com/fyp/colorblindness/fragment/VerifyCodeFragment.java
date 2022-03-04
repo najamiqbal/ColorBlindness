@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
 import org.json.JSONArray;
@@ -40,8 +41,8 @@ public class VerifyCodeFragment extends Fragment {
     EditText Code;
     Handler handler;
     int count = 120;
-    String user_mobile="",user_Name="",user_Password="",user_Email="",user_Address="",verification_code="",user_type="",dr_bio="",clinic_address,dr_specialization="";
-    String registration_url = "https://houseofsoftwares.com/color-blindness/Api.php?action=register";
+    String user_mobile="",user_Name="",user_Password="",user_Email="",user_Address="",verification_code="",user_type="",dr_bio="",clinic_address="",dr_specialization="";
+    String registration_url = "register";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class VerifyCodeFragment extends Fragment {
             }
 
 
-             Log.d("VerifyCode","user Data  "+user_type+user_Name+user_mobile+user_Email+user_Address+user_Password);
+             Log.d("VerifyCode","user Data  "+user_type+user_Name+user_mobile+user_Email+user_Address+user_Password+verification_code+dr_specialization+dr_bio+clinic_address);
 
         }
 
@@ -97,7 +98,13 @@ public class VerifyCodeFragment extends Fragment {
                             UserRegistration(user_Name, user_Email, user_mobile, user_Address, user_Password, user_type);
                         }
                         else {
-                            DrRegistration(user_Name, user_Email, user_mobile, user_Address, user_Password, user_type,dr_bio,dr_specialization,clinic_address);
+                            if (!user_Password.isEmpty() &&!user_Name.isEmpty() && !user_Email.isEmpty() && !user_type.isEmpty() && !user_mobile.isEmpty() && !user_Address.isEmpty() && !dr_specialization.isEmpty() && !dr_bio.isEmpty() && !clinic_address.isEmpty())
+                            {
+                                DrRegistration(user_Name, user_Email, user_mobile, user_Address, user_Password, user_type,dr_bio,dr_specialization,clinic_address);
+                            }else {
+                                Toast.makeText(getContext(), "null", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
 
                        // Toast.makeText(getContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
@@ -121,7 +128,7 @@ public class VerifyCodeFragment extends Fragment {
         pDialog.setMessage("Registring User....");
         pDialog.show();
 
-        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, registration_url, new Response.Listener<String>() {
+        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, AppConstants.mainurl+registration_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();
@@ -214,7 +221,7 @@ public class VerifyCodeFragment extends Fragment {
         pDialog.setMessage("Registring User....");
         pDialog.show();
 
-        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, registration_url, new Response.Listener<String>() {
+        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, AppConstants.mainurl+registration_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();

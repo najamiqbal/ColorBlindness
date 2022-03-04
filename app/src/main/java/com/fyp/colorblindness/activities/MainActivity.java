@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         if (id == R.id.nav_home) {
 
-       /*     getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
-                    new PatientHomeFragment()).commit();*/
+            getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
+                    new UserHomeFragment()).commit();
 
         } else if (id == R.id.nav_reports) {
 

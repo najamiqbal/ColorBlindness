@@ -25,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.fragment.ReportDetailFragment;
 import com.fyp.colorblindness.models.ReportsModel;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
 import org.json.JSONArray;
@@ -40,7 +41,7 @@ public class PatientReportsAdapter extends RecyclerView.Adapter<PatientReportsAd
     Context context;
     List<ReportsModel> modelList;
     ArrayList<ReportsModel> arrayList;
-    String updateReportStatusurl="https://houseofsoftwares.com/color-blindness/Api.php?action=updateReportStatus";
+    String updateReportStatusurl="updateReportStatus";
     private ProgressDialog pDialog;
     public PatientReportsAdapter(Context context, List<ReportsModel> itemList) {
         this.context = context;
@@ -116,7 +117,7 @@ public class PatientReportsAdapter extends RecyclerView.Adapter<PatientReportsAd
     private void UpdateReportStatus(String report_id, String reject) {
         pDialog.setMessage("Please Wait....");
         pDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, updateReportStatusurl, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+updateReportStatusurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response is", response.toString());

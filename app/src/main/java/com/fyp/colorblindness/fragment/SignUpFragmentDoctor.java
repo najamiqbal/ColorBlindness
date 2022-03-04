@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
 import org.json.JSONArray;
@@ -37,11 +38,11 @@ import java.util.Map;
 
 public class SignUpFragmentDoctor extends Fragment {
     View view;
-    String IsUserExist = "https://houseofsoftwares.com/color-blindness/Api.php?action=register";
+    String IsUserExist = "isUserExist";
     private ProgressDialog pDialog;
     EditText et_name_dr,et_comp_desc_dr,et_clinic_address_dr,et_specialization_dr ,et_mobile_dr, et_address_dr, et_email_dr, et_password_dr, et_confirm_password_dr;
     Button registration_btn_dr;
-    String dr_type = "1", dr_name = "",dr_phone="",dr_specialization="",dr_clinic_address="",dr_comp_ntn="",
+    String dr_type = "1", dr_name = "",dr_specialization="",dr_clinic_address="",dr_comp_ntn="",
             dr_comp_desc="", dr_email = "", dr_mobile = "", dr_address = "", dr_password = "", dr_confirm_password = "", dr_image = "";
     //firebase
     @Nullable
@@ -93,7 +94,6 @@ public class SignUpFragmentDoctor extends Fragment {
         dr_specialization=et_specialization_dr.getText().toString();
 
 
-        Log.d("IMG", "THIS is image" + dr_image);
 
         if (dr_name.isEmpty()) {
             et_name_dr.setError("Pleaase enter name");
@@ -150,13 +150,6 @@ public class SignUpFragmentDoctor extends Fragment {
             et_password_dr.setError(null);
             et_confirm_password_dr.setError(null);
         }
-        if (dr_image.isEmpty()) {
-            Toast.makeText(getContext(), "Please select image", Toast.LENGTH_SHORT).show();
-            valid = false;
-        }
-        if (dr_type.isEmpty()) {
-            valid = false;
-        }
 
         return valid;
     }
@@ -165,7 +158,7 @@ public class SignUpFragmentDoctor extends Fragment {
         Log.e("check1122", "mobile number" + dr_email);
         pDialog.setMessage("Registring ...");
         pDialog.show();
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, IsUserExist, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, AppConstants.mainurl+IsUserExist, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -180,7 +173,7 @@ public class SignUpFragmentDoctor extends Fragment {
                             pDialog.dismiss();
                             VerifyCodeFragment fragment=new VerifyCodeFragment();
                             Bundle args = new Bundle();
-                            args.putString("Mobile", dr_phone);
+                            args.putString("Mobile", dr_mobile);
                             args.putString("Name", dr_name);
                             args.putString("Address", dr_address);
                             args.putString("Email", dr_email);
@@ -189,6 +182,7 @@ public class SignUpFragmentDoctor extends Fragment {
                             args.putString("drspe", dr_specialization);
                             args.putString("ClinicAddress", dr_clinic_address);
                             args.putString("CompDesc", dr_comp_desc);
+                            args.putString("code", jsonObject.getString("code"));
                             fragment.setArguments(args);
                             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                             fragmentTransaction.replace(R.id.fragment_container, fragment);

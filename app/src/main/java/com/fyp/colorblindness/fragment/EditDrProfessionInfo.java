@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.activities.LoginSignUpActivity;
 import com.fyp.colorblindness.models.UserModelClass;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.SharedPrefManager;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
@@ -41,7 +42,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
     Button update_info_btn;
     private ProgressDialog pDialog;
     Spinner select;
-    String updateCompany_url = "https://houseofsoftwares.com/color-blindness/Api.php?action=updateCompany";
+    String updateCompany_url = "updateCompany";
 
     @Nullable
     @Override
@@ -74,7 +75,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
         pDialog.setMessage("Updating....");
         pDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, updateCompany_url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+updateCompany_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();

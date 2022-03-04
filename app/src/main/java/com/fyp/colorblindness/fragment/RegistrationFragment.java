@@ -24,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
 import org.json.JSONArray;
@@ -37,7 +38,7 @@ public class RegistrationFragment extends Fragment {
 View view;
 
 
-    String IsUserExist = "https://houseofsoftwares.com/color-blindness/Api.php?action=isUserExist";
+    String IsUserExist = "isUserExist";
     private ProgressDialog pDialog;
     EditText et_name_user, et_mobile_user, et_address_user, et_email_user, et_password_user, et_confirm_password_user;
     Button registration_btn_user;
@@ -152,7 +153,7 @@ View view;
         Log.e("check1122", "mobile number" + user_email);
         pDialog.setMessage("Registring ...");
         pDialog.show();
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, IsUserExist, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, AppConstants.mainurl+IsUserExist, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

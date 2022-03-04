@@ -2,6 +2,7 @@ package com.fyp.colorblindness.utils;
 
 public class AppConstants {
 
+    public  static String mainurl="https://testing-dev.tk/color-blindness/Api.php?action=";
     public static String contactUs=" <h3><b>Color Blindness App</b>\n" +
             "        </h3>\n" +
             "        <p>" +

@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.activities.LoginSignUpActivity;
 import com.fyp.colorblindness.models.UserModelClass;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.SharedPrefManager;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
@@ -38,7 +39,7 @@ import java.util.Map;
 
 public class UserProfile extends Fragment {
     View view;
-    String updateProfile = "https://houseofsoftwares.com/color-blindness/Api.php?action=updateProfile";
+    String updateProfile = "updateProfile";
     private ProgressDialog pDialog;
     EditText edit_name,edit_mobile,edit_addres,edit_email,edit_current_pass,new_pass;
     Button edit_info_btn;
@@ -145,7 +146,7 @@ public class UserProfile extends Fragment {
         pDialog.setMessage("Updating....");
         pDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, updateProfile, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+updateProfile, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();

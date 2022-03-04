@@ -64,8 +64,8 @@ public class doctorMainActivity extends AppCompatActivity implements NavigationV
 
         if (id == R.id.nav_home) {
 
-       /*     getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
-                    new PatientHomeFragment()).commit();*/
+            getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
+                    new DoctorHomeFragment()).commit();
 
         }else if (id==R.id.nav_professioninfo){
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

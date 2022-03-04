@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.models.UserModelClass;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.SharedPrefManager;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
@@ -32,7 +33,7 @@ import java.util.Map;
 
 public class ResultFragment extends Fragment {
     View view;
-    String SubmitReportUrl = "https://houseofsoftwares.com/color-blindness/Api.php?action=submitReport";
+    String SubmitReportUrl = "submitReport";
     TextView ans_1,ans_2,ans_3,ans_4,ans_5,ans_6,ans_7,ans_8,ans_9,ans_10,ans_11,ans_12,result_per,result_des;
     String ans1,ans2,ans3,ans4,ans5,ans6,ans7,ans8,ans9,ans10,ans11,ans12;
     int points=0;
@@ -219,7 +220,7 @@ public class ResultFragment extends Fragment {
         pDialog.setMessage("Updating....");
         pDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SubmitReportUrl, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+SubmitReportUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();

@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
+import com.fyp.colorblindness.utils.AppConstants;
 import com.fyp.colorblindness.utils.VolleyRequestsent;
 
 import org.json.JSONArray;
@@ -36,7 +37,7 @@ public class ResetPassFragment extends Fragment {
     Button update_btn;
     private ProgressDialog pDialog;
     String t_email="";
-    String resetPass_url = "https://houseofsoftwares.com/color-blindness/Api.php?action=forgetPassword";
+    String resetPass_url = "forgetPassword";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,7 +71,7 @@ public class ResetPassFragment extends Fragment {
 
     private void updatePass(final String password, final String t_email) {
         Log.d("","MOBILE NUMBER"+ this.t_email +"\n"+password);
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, resetPass_url, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, AppConstants.mainurl+resetPass_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
