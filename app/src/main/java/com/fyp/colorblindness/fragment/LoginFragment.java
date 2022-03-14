@@ -182,13 +182,13 @@ View view;
                                     getActivity().finish();
                                 } else {
                                     pDialog.dismiss();
-                                    Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), ""+jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                         }else {
                             pDialog.dismiss();
-                            Toast.makeText(getContext(), "Please try again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                         }
                     }
 

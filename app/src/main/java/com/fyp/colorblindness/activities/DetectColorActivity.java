@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -23,8 +25,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.activities.DetectColorActivity;
+import com.fyp.colorblindness.models.UserModelClass;
+import com.fyp.colorblindness.utils.SharedPrefManager;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DetectColorActivity extends AppCompatActivity {
 
@@ -32,6 +37,7 @@ public class DetectColorActivity extends AppCompatActivity {
     public TextView hexValue, rgbValue,txt_ColorName;
     public ImageView selectedImage, color_display;
     public String rgbcolor, hexcolor;
+    TextToSpeech tts;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,26 @@ public class DetectColorActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Tuch On Image");
         setSupportActionBar(toolbar);
+
+        tts=new TextToSpeech(DetectColorActivity.this, new TextToSpeech.OnInitListener() {
+
+            @Override
+            public void onInit(int status) {
+                // TODO Auto-generated method stub
+                if(status == TextToSpeech.SUCCESS){
+                    int result=tts.setLanguage(Locale.US);
+                    if(result==TextToSpeech.LANG_MISSING_DATA ||
+                            result==TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e("error", "This Language is not supported");
+                    }
+                    else{
+                        WelcomeSpeech();
+                    }
+                }
+                else
+                    Log.e("error", "Initilization Failed!");
+            }
+        });
 
 
         choose_image = findViewById(R.id.Choose_image);
@@ -76,6 +102,8 @@ public class DetectColorActivity extends AppCompatActivity {
 
                     txt_ColorName.setText(getColorNameFromRgb(r,g,b));
 
+                    ColorNameSpeech(getColorNameFromRgb(r,g,b));
+
                     //get hax color from rgb value
                     hexcolor = Integer.toHexString(touchColor);
                     if (hexcolor.length() > 2) {
@@ -94,6 +122,31 @@ public class DetectColorActivity extends AppCompatActivity {
         });
 
 
+
+    }
+
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+
+        if(tts != null){
+
+            tts.stop();
+           // tts.shutdown();
+        }
+        super.onPause();
+    }
+
+
+    private void ColorNameSpeech(String name) {
+
+        tts.speak(name, TextToSpeech.QUEUE_FLUSH, null);
+
+    }
+
+    private void WelcomeSpeech() {
+        final UserModelClass userModelClass = SharedPrefManager.getInstance(DetectColorActivity.this).getUser();
+            tts.speak("Welcome "+userModelClass.getUser_name(), TextToSpeech.QUEUE_FLUSH, null);
 
     }
 

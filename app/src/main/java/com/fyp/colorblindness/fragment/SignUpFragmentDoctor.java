@@ -43,8 +43,8 @@ public class SignUpFragmentDoctor extends Fragment {
     EditText et_name_dr,et_comp_desc_dr,et_clinic_address_dr,et_specialization_dr ,et_mobile_dr, et_address_dr, et_email_dr, et_password_dr, et_confirm_password_dr;
     Button registration_btn_dr;
     String dr_type = "1", dr_name = "",dr_specialization="",dr_clinic_address="",dr_comp_ntn="",
-            dr_comp_desc="", dr_email = "", dr_mobile = "", dr_address = "", dr_password = "", dr_confirm_password = "", dr_image = "";
-    //firebase
+            dr_comp_desc="", dr_email = "", dr_mobile = "", dr_address = "", dr_password = "", dr_confirm_password = "";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

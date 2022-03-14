@@ -43,7 +43,7 @@ public class DoctorHomeFragment extends Fragment {
         UserModelClass userModelClass= SharedPrefManager.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             String dr_id=userModelClass.getUser_id();
-            if (dr_id.equals("95")){
+            if (dr_id.equals("101")){
                 dr_patients.setVisibility(View.VISIBLE);
             }
         }
