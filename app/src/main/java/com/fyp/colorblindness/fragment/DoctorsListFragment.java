@@ -21,8 +21,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.adapters.DoctorsListAdapter;
 import com.fyp.colorblindness.models.UserModelClass;
-import com.fyp.colorblindness.utils.AppConstants;
-import com.fyp.colorblindness.utils.VolleyRequestsent;
+import com.fyp.colorblindness.genralclasses.Constants_values;
+import com.fyp.colorblindness.genralclasses.RequestsQueueVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,7 +65,7 @@ public class DoctorsListFragment extends Fragment {
     private void GetDoctors() {
         pDialog.setMessage("please Wait....");
         pDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+getDoctorsUrl, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants_values.mainurl+getDoctorsUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response is", response.toString());
@@ -121,7 +121,7 @@ public class DoctorsListFragment extends Fragment {
 
             }
         };
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest);
     }
 
     @Override

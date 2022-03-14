@@ -1,6 +1,6 @@
-package com.fyp.colorblindness.utils;
+package com.fyp.colorblindness.genralclasses;
 
-public class AppConstants {
+public class Constants_values {
 
     public  static String mainurl="https://testing-dev.tk/color-blindness/Api.php?action=";
     public static String contactUs=" <h3><b>Color Blindness App</b>\n" +

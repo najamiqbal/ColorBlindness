@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -23,10 +21,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
-import com.fyp.colorblindness.fragment.ReportDetailFragment;
 import com.fyp.colorblindness.models.ReportsModel;
-import com.fyp.colorblindness.utils.AppConstants;
-import com.fyp.colorblindness.utils.VolleyRequestsent;
+import com.fyp.colorblindness.genralclasses.Constants_values;
+import com.fyp.colorblindness.genralclasses.RequestsQueueVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -117,7 +114,7 @@ public class PatientReportsAdapter extends RecyclerView.Adapter<PatientReportsAd
     private void UpdateReportStatus(String report_id, String reject) {
         pDialog.setMessage("Please Wait....");
         pDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+updateReportStatusurl, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants_values.mainurl+updateReportStatusurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response is", response.toString());
@@ -161,6 +158,6 @@ public class PatientReportsAdapter extends RecyclerView.Adapter<PatientReportsAd
 
             }
         };
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest);
     }
 }

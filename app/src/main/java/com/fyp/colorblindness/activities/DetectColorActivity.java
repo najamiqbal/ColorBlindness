@@ -1,8 +1,5 @@
 package com.fyp.colorblindness.activities;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -10,23 +7,19 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.fyp.colorblindness.R;
-import com.fyp.colorblindness.activities.DetectColorActivity;
 import com.fyp.colorblindness.models.UserModelClass;
-import com.fyp.colorblindness.utils.SharedPrefManager;
+import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -145,7 +138,7 @@ public class DetectColorActivity extends AppCompatActivity {
     }
 
     private void WelcomeSpeech() {
-        final UserModelClass userModelClass = SharedPrefManager.getInstance(DetectColorActivity.this).getUser();
+        final UserModelClass userModelClass = SharedPreferenceClass.getInstance(DetectColorActivity.this).getUser();
             tts.speak("Welcome "+userModelClass.getUser_name(), TextToSpeech.QUEUE_FLUSH, null);
 
     }

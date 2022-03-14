@@ -1,7 +1,6 @@
 package com.fyp.colorblindness.fragment;
 
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -10,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,8 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
-import com.fyp.colorblindness.utils.AppConstants;
-import com.fyp.colorblindness.utils.VolleyRequestsent;
+import com.fyp.colorblindness.genralclasses.Constants_values;
+import com.fyp.colorblindness.genralclasses.RequestsQueueVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -153,7 +150,7 @@ View view;
         Log.e("check1122", "mobile number" + user_email);
         pDialog.setMessage("Registring ...");
         pDialog.show();
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, AppConstants.mainurl+IsUserExist, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Constants_values.mainurl+IsUserExist, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -208,7 +205,7 @@ View view;
 
         };
 
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest);
     }
 
 }

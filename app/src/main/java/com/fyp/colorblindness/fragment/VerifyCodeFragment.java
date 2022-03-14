@@ -23,8 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
-import com.fyp.colorblindness.utils.AppConstants;
-import com.fyp.colorblindness.utils.VolleyRequestsent;
+import com.fyp.colorblindness.genralclasses.Constants_values;
+import com.fyp.colorblindness.genralclasses.RequestsQueueVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,7 +128,7 @@ public class VerifyCodeFragment extends Fragment {
         pDialog.setMessage("Registring User....");
         pDialog.show();
 
-        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, AppConstants.mainurl+registration_url, new Response.Listener<String>() {
+        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, Constants_values.mainurl+registration_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();
@@ -184,7 +184,7 @@ public class VerifyCodeFragment extends Fragment {
 
             }
         };
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest2);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest2);
     }
 
     private void thread() {
@@ -221,7 +221,7 @@ public class VerifyCodeFragment extends Fragment {
         pDialog.setMessage("Registring User....");
         pDialog.show();
 
-        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, AppConstants.mainurl+registration_url, new Response.Listener<String>() {
+        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, Constants_values.mainurl+registration_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();
@@ -274,7 +274,7 @@ public class VerifyCodeFragment extends Fragment {
 
             }
         };
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest2);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest2);
     }
 
 

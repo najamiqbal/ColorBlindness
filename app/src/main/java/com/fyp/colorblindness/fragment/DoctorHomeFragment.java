@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.models.UserModelClass;
-import com.fyp.colorblindness.utils.SharedPrefManager;
+import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
 
 public class DoctorHomeFragment extends Fragment {
     View view;
@@ -40,7 +40,7 @@ public class DoctorHomeFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-        UserModelClass userModelClass= SharedPrefManager.getInstance(getContext()).getUser();
+        UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             String dr_id=userModelClass.getUser_id();
             if (dr_id.equals("101")){

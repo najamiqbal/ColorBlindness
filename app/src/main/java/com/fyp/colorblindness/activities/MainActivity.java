@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.fragment.AboutUsFragment;
 import com.fyp.colorblindness.fragment.ContactUsFragment;
@@ -15,7 +14,7 @@ import com.fyp.colorblindness.fragment.UserHomeFragment;
 
 import com.fyp.colorblindness.fragment.UserProfile;
 import com.fyp.colorblindness.models.UserModelClass;
-import com.fyp.colorblindness.utils.SharedPrefManager;
+import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
         ownername = navigationView.getHeaderView(0).findViewById(R.id.username);
         ownermail = navigationView.getHeaderView(0).findViewById(R.id.useremail);
-        final UserModelClass userModelClass = SharedPrefManager.getInstance(MainActivity.this).getUser();
+        final UserModelClass userModelClass = SharedPreferenceClass.getInstance(MainActivity.this).getUser();
         if (userModelClass != null) {
             ownername.setText(userModelClass.getUser_name());
             ownermail.setText(userModelClass.getUser_email());
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         }
         else if (id == R.id.nav_logout) {
 
-            SharedPrefManager.getInstance(MainActivity.this).logOut();
+            SharedPreferenceClass.getInstance(MainActivity.this).logOut();
             startActivity(new Intent(this, LoginSignUpActivity.class));
             this.finish();
 

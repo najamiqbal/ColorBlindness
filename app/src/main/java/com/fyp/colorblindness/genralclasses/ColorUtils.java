@@ -1,4 +1,4 @@
-package com.fyp.colorblindness.utils;
+package com.fyp.colorblindness.genralclasses;
 
 
 

@@ -24,9 +24,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.activities.LoginSignUpActivity;
 import com.fyp.colorblindness.models.UserModelClass;
-import com.fyp.colorblindness.utils.AppConstants;
-import com.fyp.colorblindness.utils.SharedPrefManager;
-import com.fyp.colorblindness.utils.VolleyRequestsent;
+import com.fyp.colorblindness.genralclasses.Constants_values;
+import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
+import com.fyp.colorblindness.genralclasses.RequestsQueueVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,7 +53,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
     }
 
     private void initialization() {
-        UserModelClass userModelClass= SharedPrefManager.getInstance(getContext()).getUser();
+        UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         pDialog = new ProgressDialog(getContext());
         pDialog.setCancelable(false);
         et_dr_city=view.findViewById(R.id.drcity_address_edit);
@@ -75,7 +75,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
         pDialog.setMessage("Updating....");
         pDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+updateCompany_url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants_values.mainurl+updateCompany_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();
@@ -88,7 +88,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
                         if (jsonObject.getString("status").equals("true")) {
                             pDialog.dismiss();
                             Toast.makeText(getContext(), "Info Updated Successfully", Toast.LENGTH_SHORT).show();
-                            SharedPrefManager.getInstance(getContext()).logOut();
+                            SharedPreferenceClass.getInstance(getContext()).logOut();
                             // Goto Login Page
                             Intent intent=new Intent(getContext(), LoginSignUpActivity.class);
                             startActivity(intent);
@@ -123,11 +123,11 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
                 return params;
             }
         };
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest);
     }
 
     private void BindData() {
-        UserModelClass userModelClass=SharedPrefManager.getInstance(getContext()).getUser();
+        UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             et_bio_desc.setText(userModelClass.getDoctor_bio());
             et_dr_city.setText(userModelClass.getCompany_address());
@@ -141,7 +141,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
         dr_spec = et_dr_spec.getText().toString();
         dr_desc = et_bio_desc.getText().toString();
         dr_address = et_dr_city.getText().toString();
-        UserModelClass userModelClass= SharedPrefManager.getInstance(getContext()).getUser();
+        UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             UserId = userModelClass.getUser_id();
             Log.d("editCompany info","Saller id"+UserId);

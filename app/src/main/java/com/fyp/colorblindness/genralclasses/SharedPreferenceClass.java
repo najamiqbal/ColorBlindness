@@ -1,4 +1,4 @@
-package com.fyp.colorblindness.utils;
+package com.fyp.colorblindness.genralclasses;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,20 +6,20 @@ import android.content.SharedPreferences;
 import com.fyp.colorblindness.models.UserModelClass;
 import com.google.gson.Gson;
 
-public class SharedPrefManager {
-    private static SharedPrefManager mInstance;
+public class SharedPreferenceClass {
+    private static SharedPreferenceClass mInstance;
     private static Context mCtx;
 
     private static final String SHARED_PREF_NAME = "mysharedpref";
     private static final String KEY_USER = "user";
-    private SharedPrefManager(Context context) {
+    private SharedPreferenceClass(Context context) {
         mCtx = context;
 
     }
 
-    public static synchronized SharedPrefManager getInstance(Context context) {
+    public static synchronized SharedPreferenceClass getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new SharedPrefManager(context);
+            mInstance = new SharedPreferenceClass(context);
         }
         return mInstance;
     }

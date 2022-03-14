@@ -2,7 +2,6 @@ package com.fyp.colorblindness.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,13 +19,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.activities.LoginSignUpActivity;
 import com.fyp.colorblindness.models.UserModelClass;
-import com.fyp.colorblindness.utils.AppConstants;
-import com.fyp.colorblindness.utils.SharedPrefManager;
-import com.fyp.colorblindness.utils.VolleyRequestsent;
+import com.fyp.colorblindness.genralclasses.Constants_values;
+import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
+import com.fyp.colorblindness.genralclasses.RequestsQueueVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,7 +69,7 @@ public class UserProfile extends Fragment {
     }
 
     private void BindData() {
-        UserModelClass userModelClass= SharedPrefManager.getInstance(getContext()).getUser();
+        UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             String number=userModelClass.getUser_mobile();
             edit_name.setText(userModelClass.getUser_name());
@@ -92,7 +88,7 @@ public class UserProfile extends Fragment {
         edit_user_address = edit_addres.getText().toString();
         edit_user_currentPass = edit_current_pass.getText().toString();
         edit_user_newPass = new_pass.getText().toString();
-        UserModelClass userModelClass = SharedPrefManager.getInstance(getContext()).getUser();
+        UserModelClass userModelClass = SharedPreferenceClass.getInstance(getContext()).getUser();
         UserId=userModelClass.getUser_id();
 
         Log.d("IMG", "THIS is image" + edit_user_photo);
@@ -146,7 +142,7 @@ public class UserProfile extends Fragment {
         pDialog.setMessage("Updating....");
         pDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+updateProfile, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants_values.mainurl+updateProfile, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.hide();
@@ -159,7 +155,7 @@ public class UserProfile extends Fragment {
                         if (jsonObject.getString("status").equals("true")) {
                             pDialog.dismiss();
                             Toast.makeText(getContext(), "Info Updated Successfully", Toast.LENGTH_SHORT).show();
-                            SharedPrefManager.getInstance(getContext()).logOut();
+                            SharedPreferenceClass.getInstance(getContext()).logOut();
                             // Goto Login Page
                             Intent intent=new Intent(getContext(), LoginSignUpActivity.class);
                             startActivity(intent);
@@ -196,7 +192,7 @@ public class UserProfile extends Fragment {
                 return params;
             }
         };
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest);
     }
 
 }

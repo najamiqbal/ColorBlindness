@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.fyp.colorblindness.R;
-import com.fyp.colorblindness.utils.AppConstants;
+import com.fyp.colorblindness.genralclasses.Constants_values;
 
 public class ContactUsFragment extends Fragment {
     View view;
@@ -22,7 +22,7 @@ public class ContactUsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.contact_us_fragment,container,false);
         textView=view.findViewById(R.id.tv_contacts);
-        textView.setText(Html.fromHtml(AppConstants.contactUs));
+        textView.setText(Html.fromHtml(Constants_values.contactUs));
         return view;
     }
     @Override

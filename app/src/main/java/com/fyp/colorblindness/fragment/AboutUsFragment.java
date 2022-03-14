@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.fyp.colorblindness.R;
-import com.fyp.colorblindness.utils.AppConstants;
+import com.fyp.colorblindness.genralclasses.Constants_values;
 
 public class AboutUsFragment extends Fragment {
     View view;
@@ -22,7 +22,7 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.about_us_fragment,container,false);
         textView=view.findViewById(R.id.tv_company);
-        textView.setText(Html.fromHtml(AppConstants.company));
+        textView.setText(Html.fromHtml(Constants_values.company));
         return view;
     }
     @Override

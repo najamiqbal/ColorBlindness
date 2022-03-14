@@ -30,9 +30,9 @@ import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.activities.MainActivity;
 import com.fyp.colorblindness.activities.doctorMainActivity;
 import com.fyp.colorblindness.models.UserModelClass;
-import com.fyp.colorblindness.utils.AppConstants;
-import com.fyp.colorblindness.utils.SharedPrefManager;
-import com.fyp.colorblindness.utils.VolleyRequestsent;
+import com.fyp.colorblindness.genralclasses.Constants_values;
+import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
+import com.fyp.colorblindness.genralclasses.RequestsQueueVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,7 +128,7 @@ View view;
     private void UserLogin(final String t_email, final String t_pass) {
         pDialog.setMessage("Login please Wait....");
         pDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+Login_url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants_values.mainurl+Login_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response is", response.toString());
@@ -150,7 +150,7 @@ View view;
                                 userModelClass.setUser_type(jsonObject.getString("user_type"));
 
 
-                                if (SharedPrefManager.getInstance(getContext()).addUserToPref(userModelClass)) {
+                                if (SharedPreferenceClass.getInstance(getContext()).addUserToPref(userModelClass)) {
                                     pDialog.dismiss();
                                     Intent intent = new Intent(getContext(), MainActivity.class);
                                     startActivity(intent);
@@ -175,7 +175,7 @@ View view;
                                 userModelClass.setUser_type(jsonObject.getString("user_type"));
 
 
-                                if (SharedPrefManager.getInstance(getContext()).addUserToPref(userModelClass)) {
+                                if (SharedPreferenceClass.getInstance(getContext()).addUserToPref(userModelClass)) {
                                     pDialog.dismiss();
                                     Intent intent = new Intent(getContext(), doctorMainActivity.class);
                                     startActivity(intent);
@@ -216,7 +216,7 @@ View view;
 
             }
         };
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest);
     }
 
     public class ViewDialog {

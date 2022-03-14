@@ -19,13 +19,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
-import com.fyp.colorblindness.adapters.MyReportsAdapter;
 import com.fyp.colorblindness.adapters.PatientReportsAdapter;
 import com.fyp.colorblindness.models.ReportsModel;
 import com.fyp.colorblindness.models.UserModelClass;
-import com.fyp.colorblindness.utils.AppConstants;
-import com.fyp.colorblindness.utils.SharedPrefManager;
-import com.fyp.colorblindness.utils.VolleyRequestsent;
+import com.fyp.colorblindness.genralclasses.Constants_values;
+import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
+import com.fyp.colorblindness.genralclasses.RequestsQueueVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +59,7 @@ public class ClinicDoctorReports extends Fragment {
         //GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,2);
         ItemList = new ArrayList<>();
         reports_recyclerView.setLayoutManager(linearLayoutManager);
-        UserModelClass userModelClass= SharedPrefManager.getInstance(getContext()).getUser();
+        UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             user_id=userModelClass.getUser_id();
         }
@@ -70,7 +69,7 @@ public class ClinicDoctorReports extends Fragment {
     private void GetReports(String user_id) {
         pDialog.setMessage("please Wait....");
         pDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.mainurl+getMyReportsUrl, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants_values.mainurl+getMyReportsUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response is", response.toString());
@@ -128,7 +127,7 @@ public class ClinicDoctorReports extends Fragment {
 
             }
         };
-        VolleyRequestsent.getInstance().addRequestQueue(stringRequest);
+        RequestsQueueVolley.getInstance().addRequestQueue(stringRequest);
     }
 
     @Override

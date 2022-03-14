@@ -1,4 +1,4 @@
-package com.fyp.colorblindness.utils;
+package com.fyp.colorblindness.genralclasses;
 
 import android.app.Application;
 import android.text.TextUtils;
@@ -7,8 +7,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class VolleyRequestsent extends Application {
-    private static VolleyRequestsent ourInstance;
+public class RequestsQueueVolley extends Application {
+    private static RequestsQueueVolley ourInstance;
     private static RequestQueue requestQueue;
     private static final String TAG = "DEFAULT";
 
@@ -18,7 +18,7 @@ public class VolleyRequestsent extends Application {
         ourInstance = this;
     }
 
-    public static VolleyRequestsent getInstance()
+    public static RequestsQueueVolley getInstance()
     {
         return ourInstance;
     }
