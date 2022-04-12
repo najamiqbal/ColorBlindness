@@ -32,6 +32,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserProfile extends Fragment {
     View view;
@@ -134,9 +136,34 @@ public class UserProfile extends Fragment {
         }else {
             new_pass.setError(null);
         }
+
+        if (!isValidPassword(edit_user_newPass)) {
+            new_pass.setError("Use characters, numbers and symbols. minimum length 8");
+
+            valid = false;
+            Log.d("SignUp","validation");
+
+        } else {
+            new_pass.setError(null);
+
+            Log.d("SignUp","Pass validation");
+        }
         return valid;
     }
 
+
+    //*****************************************************************
+    public static boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+])[A-Za-z\\d][A-Za-z\\d!@#$%^&*()_+]{7,19}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
 
     private void UserUpdate(final String userId, final String edit_user_name, final String edit_user_email, final String edit_user_mobile, final String edit_user_address, final String edit_user_newPass) {
         pDialog.setMessage("Updating....");

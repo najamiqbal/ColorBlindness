@@ -47,7 +47,7 @@ public class ReportDetailFragment extends Fragment implements View.OnClickListen
         view = inflater.inflate(R.layout.report_detail_fragment, container, false);
         initialization();
         BindData();
-        if (v_reportstatus.equals("approved")) {
+        if (v_reportstatus.equals("accept")) {
             cardViewdoctor.setVisibility(View.VISIBLE);
             GetdoctorDetail(v_reportid);
         }

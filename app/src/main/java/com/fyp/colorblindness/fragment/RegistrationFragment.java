@@ -30,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegistrationFragment extends Fragment {
 View view;
@@ -142,9 +144,33 @@ View view;
             valid = false;
         }
 
+        if (!isValidPassword(user_password)) {
+            et_password_user.setError("Use characters, numbers and symbols. minimum length 8");
+            et_confirm_password_user.setError("Use characters, numbers and symbols.");
+            valid = false;
+            Log.d("SignUp","validation");
+
+        } else {
+            et_password_user.setError(null);
+            et_confirm_password_user.setError(null);
+            Log.d("SignUp","Pass validation");
+        }
+
         return valid;
     }
 
+    //*****************************************************************
+    public static boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+])[A-Za-z\\d][A-Za-z\\d!@#$%^&*()_+]{7,19}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
 
     private void IsUserExist(final String user_email) {
         Log.e("check1122", "mobile number" + user_email);

@@ -39,7 +39,7 @@ public class ResultFragment extends Fragment {
     int points=0;
     private ProgressDialog pDialog;
     Button btn_report_submit;
-    String doctor_id="95",report_status="pending",answers_string="",user_id="";
+    String doctor_id="101",report_status="pending",answers_string="",user_id="";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

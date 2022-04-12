@@ -57,6 +57,7 @@ public class ForgetPassFragment extends Fragment
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                t_email=et_email.getText().toString();
                 if (!t_email.isEmpty()){
                     IsUserExist(t_email);
 
