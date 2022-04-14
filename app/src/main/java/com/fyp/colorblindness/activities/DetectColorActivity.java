@@ -1,10 +1,14 @@
 package com.fyp.colorblindness.activities;
 
+import android.Manifest;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -12,25 +16,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.BuildConfig;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.models.UserModelClass;
 import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class DetectColorActivity extends AppCompatActivity {
 
     public Button choose_image;
-    public TextView hexValue, rgbValue,txt_ColorName;
+    public TextView hexValue, rgbValue, txt_ColorName;
     public ImageView selectedImage, color_display;
     public String rgbcolor, hexcolor;
+    private int clickImage;
+    private int GALLERY = 1, CAMERA = 2;
     TextToSpeech tts;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,23 +57,21 @@ public class DetectColorActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Tuch On Image");
         setSupportActionBar(toolbar);
-
-        tts=new TextToSpeech(DetectColorActivity.this, new TextToSpeech.OnInitListener() {
+        requestMultiplePermissions();
+        tts = new TextToSpeech(DetectColorActivity.this, new TextToSpeech.OnInitListener() {
 
             @Override
             public void onInit(int status) {
                 // TODO Auto-generated method stub
-                if(status == TextToSpeech.SUCCESS){
-                    int result=tts.setLanguage(Locale.US);
-                    if(result==TextToSpeech.LANG_MISSING_DATA ||
-                            result==TextToSpeech.LANG_NOT_SUPPORTED){
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = tts.setLanguage(Locale.US);
+                    if (result == TextToSpeech.LANG_MISSING_DATA ||
+                            result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("error", "This Language is not supported");
-                    }
-                    else{
+                    } else {
                         WelcomeSpeech();
                     }
-                }
-                else
+                } else
                     Log.e("error", "Initilization Failed!");
             }
         });
@@ -71,8 +88,12 @@ public class DetectColorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //start intent for select image
-                Intent pickImage = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickImage, 1);//you can change request code you want
+
+                clickImage=1;
+                showPictureDialog();
+
+              /*  Intent pickImage = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickImage, 1);//you can change request code you want*/
             }
         });
 
@@ -93,9 +114,9 @@ public class DetectColorActivity extends AppCompatActivity {
                     rgbcolor = r + "," + g + "," + b + ",";
                     rgbValue.setText("RGB:   " + rgbcolor);
 
-                    txt_ColorName.setText(getColorNameFromRgb(r,g,b));
+                    txt_ColorName.setText(getColorNameFromRgb(r, g, b));
 
-                    ColorNameSpeech(getColorNameFromRgb(r,g,b));
+                    ColorNameSpeech(getColorNameFromRgb(r, g, b));
 
                     //get hax color from rgb value
                     hexcolor = Integer.toHexString(touchColor);
@@ -115,17 +136,113 @@ public class DetectColorActivity extends AppCompatActivity {
         });
 
 
+    }
 
+    private void showPictureDialog() {
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Select photo from gallery",
+                "Capture photo from camera"};
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                openGalleryImage();
+                                break;
+                            case 1:
+                                openCamera();
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
+    public void openGalleryImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY);
+    }
+
+    public void openCamera() {
+        try {
+            Intent takeVideoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takeVideoIntent.resolveActivity(this.getPackageManager()) != null) {
+                startActivityForResult(takeVideoIntent, CAMERA);
+            }
+        } catch (ActivityNotFoundException anfe) {
+            //display an error message
+            String errorMessage = "Your device doesn't support capturing images!";
+            Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    private void requestMultiplePermissions() {
+        Dexter.withContext(DetectColorActivity.this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            //Toast.makeText(getContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
+                            Log.d("permissions are granted", "done");
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            AlertDialog alertDialog = new AlertDialog.Builder(DetectColorActivity.this).create();
+                            alertDialog.setTitle("Alert Dialog");
+                            alertDialog.setMessage("Please Allow Permissions to use this App");
+                            alertDialog.setCancelable(false);
+                            alertDialog.setIcon(R.drawable.applogo);
+
+                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                            Uri.fromParts("package", BuildConfig.APPLICATION_ID, null));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
+                            });
+
+                            alertDialog.show();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(DetectColorActivity.this, "Some Error! ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
     }
 
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
 
-        if(tts != null){
+        if (tts != null) {
 
             tts.stop();
-           // tts.shutdown();
+            // tts.shutdown();
         }
         super.onPause();
     }
@@ -139,7 +256,7 @@ public class DetectColorActivity extends AppCompatActivity {
 
     private void WelcomeSpeech() {
         final UserModelClass userModelClass = SharedPreferenceClass.getInstance(DetectColorActivity.this).getUser();
-            tts.speak("Welcome "+userModelClass.getUser_name(), TextToSpeech.QUEUE_FLUSH, null);
+        tts.speak("Welcome " + userModelClass.getUser_name(), TextToSpeech.QUEUE_FLUSH, null);
 
     }
 
@@ -153,10 +270,39 @@ public class DetectColorActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK && !data.equals(null)) {
+        switch (clickImage) {
+            case 1:
+                if (requestCode == GALLERY) {
+                    if (data != null) {
+                        Uri contentURI = data.getData();
+                        try {
+
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                            selectedImage.setImageBitmap(bitmap);
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                } else if (requestCode == CAMERA) {
+                    Uri contentURI = data.getData();
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    selectedImage.setImageBitmap(bitmap);
+                   // selectedImage.setImageURI(contentURI);
+
+                }
+
+                break;
+        }
+
+
+      /*  if (requestCode == 1 && resultCode == RESULT_OK && !data.equals(null)) {
             Uri Image = data.getData();
             selectedImage.setImageURI(Image);
-        }
+        }*/
     }
 
     /**

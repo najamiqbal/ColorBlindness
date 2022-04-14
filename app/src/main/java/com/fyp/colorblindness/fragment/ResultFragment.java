@@ -39,6 +39,7 @@ public class ResultFragment extends Fragment {
     int points=0;
     private ProgressDialog pDialog;
     Button btn_report_submit;
+    int total_p;
     String doctor_id="101",report_status="pending",answers_string="",user_id="";
     @Nullable
     @Override
@@ -136,18 +137,18 @@ public class ResultFragment extends Fragment {
             ans_12.setCompoundDrawablesWithIntrinsicBounds(R.drawable.cross, 0, 0, 0);
         }
 
-        int total= points * 100 /12;
+        total_p= points * 100 /12;
         //String subtotal= String.valueOf(total*100);
-        Toast.makeText(getContext(), ""+points+"this is total"+total, Toast.LENGTH_SHORT).show();
-        result_per.setText("total Result: "+total+"%");
-        if (total<=32)
+        Toast.makeText(getContext(), ""+points+"this is total"+total_p, Toast.LENGTH_SHORT).show();
+        result_per.setText("total Result: "+total_p+"%");
+        if (total_p<=32)
         {
              result_des.setText("Severe Color Vision Defieciency");
-        }else if (total<=69){
+        }else if (total_p<=69){
              result_des.setText("Moderate Color Vision Defieciency");
-        }else if (total<=89){
+        }else if (total_p<=89){
              result_des.setText("Mild Color Vision Defieciency");
-        }else if (total<=100){
+        }else if (total_p<=100){
              result_des.setText("Normal Color Vision");
         }
 
@@ -194,7 +195,12 @@ public class ResultFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 answers_string=ans1+","+ans2+","+ans3+","+ans4+","+ans5+","+ans6+","+ans7+","+ans8+","+ans9+","+ans10+","+ans11+","+ans12;
-                SubmitReport(doctor_id,user_id,answers_string,report_status,result_per.getText().toString(),result_des.getText().toString());
+                if (total_p<70){
+                    SubmitReport(doctor_id,user_id,answers_string,report_status,result_per.getText().toString(),result_des.getText().toString());
+
+                }else {
+                    Toast.makeText(getContext(), "Your Result is Fine", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
