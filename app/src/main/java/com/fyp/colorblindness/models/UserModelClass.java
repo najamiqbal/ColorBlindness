@@ -11,6 +11,15 @@ public class UserModelClass {
     private String specialization;
     private String company_address;
     private String doctor_bio;
+    private String pmdc_no;
+
+    public String getPmdc_no() {
+        return pmdc_no;
+    }
+
+    public void setPmdc_no(String pmdc_no) {
+        this.pmdc_no = pmdc_no;
+    }
 
     public String getUser_name() {
         return user_name;

@@ -41,7 +41,7 @@ public class VerifyCodeFragment extends Fragment {
     EditText Code;
     Handler handler;
     int count = 120;
-    String user_mobile="",user_Name="",user_Password="",user_Email="",user_Address="",verification_code="",user_type="",dr_bio="",clinic_address="",dr_specialization="";
+    String user_mobile="",user_Name="",user_Password="",pmdc_no="",user_Email="",user_Address="",verification_code="",user_type="",dr_bio="",clinic_address="",dr_specialization="";
     String registration_url = "register";
     @Nullable
     @Override
@@ -76,6 +76,7 @@ public class VerifyCodeFragment extends Fragment {
                 user_Password = getArguments().getString("Password");
                 verification_code = getArguments().getString("code");
                 dr_specialization = getArguments().getString("drspe");
+                pmdc_no = getArguments().getString("pmdc");
                 dr_bio = getArguments().getString("CompDesc");
                 clinic_address = getArguments().getString("ClinicAddress");
 
@@ -100,7 +101,7 @@ public class VerifyCodeFragment extends Fragment {
                         else {
                             if (!user_Password.isEmpty() &&!user_Name.isEmpty() && !user_Email.isEmpty() && !user_type.isEmpty() && !user_mobile.isEmpty() && !user_Address.isEmpty() && !dr_specialization.isEmpty() && !dr_bio.isEmpty() && !clinic_address.isEmpty())
                             {
-                                DrRegistration(user_Name, user_Email, user_mobile, user_Address, user_Password, user_type,dr_bio,dr_specialization,clinic_address);
+                                DrRegistration(user_Name, user_Email, user_mobile, user_Address, user_Password, user_type,dr_bio,dr_specialization,clinic_address,pmdc_no);
                             }else {
                                 Toast.makeText(getContext(), "null", Toast.LENGTH_SHORT).show();
                             }
@@ -124,7 +125,7 @@ public class VerifyCodeFragment extends Fragment {
 
     }
 
-    private void DrRegistration(String user_name, String user_email, String user_mobile, String user_address, String user_password, String user_type, String dr_bio, String dr_specialization, String clinic_address) {
+    private void DrRegistration(String user_name, String user_email, String user_mobile, String user_address, String user_password, String user_type, String dr_bio, String dr_specialization, String clinic_address,String pmdc_no) {
         pDialog.setMessage("Registring User....");
         pDialog.show();
 
@@ -180,6 +181,7 @@ public class VerifyCodeFragment extends Fragment {
                 params.put("specialization", dr_specialization);
                 params.put("doctor_city", clinic_address);
                 params.put("description", dr_bio);
+                params.put("pmdc_no", pmdc_no);
                 return params;
 
             }

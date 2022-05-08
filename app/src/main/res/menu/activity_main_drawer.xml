@@ -18,6 +18,11 @@
             android:icon="@drawable/ic_account"
             android:title="My profile" />
 
+        <item
+            android:id="@+id/nav_change_pass"
+            android:icon="@drawable/ic_lock"
+            android:title="Change Password" />
+
     </group>
 
     <item android:title="Communicate">
@@ -30,6 +35,10 @@
                 android:id="@+id/nav_contact"
                 android:icon="@drawable/ic_contact_us"
                 android:title="contact us" />
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_message"
+                android:title="Feedback" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_exit_to_app"

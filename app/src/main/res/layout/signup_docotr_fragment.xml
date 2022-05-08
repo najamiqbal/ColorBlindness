@@ -149,6 +149,22 @@
                 android:textColorHint="@color/hint_text"
                 />
             <EditText
+                android:id="@+id/dr_pmdc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="PMDC No"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_style"
+                android:drawableLeft="@drawable/ic_message"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:inputType="text"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/hint_text"
+                />
+
+            <EditText
                 android:id="@+id/dr_specialization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

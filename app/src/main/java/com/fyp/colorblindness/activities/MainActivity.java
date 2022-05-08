@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.fragment.AboutUsFragment;
+import com.fyp.colorblindness.fragment.ChangePassword;
 import com.fyp.colorblindness.fragment.ContactUsFragment;
+import com.fyp.colorblindness.fragment.FeedBackFragment;
 import com.fyp.colorblindness.fragment.MyReportsFragment;
 import com.fyp.colorblindness.fragment.UserHomeFragment;
 
@@ -83,13 +85,28 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
                     new UserProfile()).addToBackStack("fragment").commit();
 
         }
+        else if (id == R.id.nav_change_pass) {
+
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
+                    new ChangePassword()).addToBackStack("fragment").commit();
+
+        }
         else if (id == R.id.nav_about) {
 
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
                     new AboutUsFragment()).addToBackStack("fragment").commit();
 
-        }else if (id == R.id.nav_contact) {
+        }
+        else if (id == R.id.nav_feedback) {
+
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
+                    new FeedBackFragment()).addToBackStack("fragment").commit();
+
+        }
+        else if (id == R.id.nav_contact) {
 
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,

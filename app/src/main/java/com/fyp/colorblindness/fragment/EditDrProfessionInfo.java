@@ -37,8 +37,8 @@ import java.util.Map;
 
 public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItemSelectedListener {
     View view;
-    EditText et_dr_city,et_dr_spec,et_bio_desc;
-    String dr_profession="",dr_desc="", dr_spec="",dr_address="",UserId="";
+    EditText et_dr_city,et_dr_spec,et_bio_desc,et_pmdc_no;
+    String dr_profession="",dr_desc="", dr_spec="",pmdc_no,dr_address="",UserId="";
     Button update_info_btn;
     private ProgressDialog pDialog;
     Spinner select;
@@ -60,18 +60,19 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
         et_dr_spec=view.findViewById(R.id.dr_spec_edit);
         et_bio_desc=view.findViewById(R.id.dr_bio_edit);
         update_info_btn=view.findViewById(R.id.professioninfo_update_btn);
+        et_pmdc_no=view.findViewById(R.id.dr_pmdc_edit);
         BindData();
         update_info_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validate()){
-                    UpdateProfessionInfo(dr_address,dr_desc, dr_spec,UserId);
+                    UpdateProfessionInfo(pmdc_no,dr_address,dr_desc, dr_spec,UserId);
                 }
             }
         });
     }
 
-    private void UpdateProfessionInfo(final String dr_address, final String dr_desc, final String dr_spec, final String userId) {
+    private void UpdateProfessionInfo(final String pmdc_no,final String dr_address, final String dr_desc, final String dr_spec, final String userId) {
         pDialog.setMessage("Updating....");
         pDialog.show();
 
@@ -119,6 +120,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
                 params.put("specialization", dr_spec);
                 params.put("doctor_city", dr_address);
                 params.put("description", dr_desc);
+                params.put("pmdc_no", pmdc_no);
                 params.put("user_id", userId);
                 return params;
             }
@@ -132,6 +134,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
             et_bio_desc.setText(userModelClass.getDoctor_bio());
             et_dr_city.setText(userModelClass.getCompany_address());
             et_dr_spec.setText(userModelClass.getSpecialization());
+            et_pmdc_no.setText(userModelClass.getPmdc_no());
         }
     }
 
@@ -141,6 +144,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
         dr_spec = et_dr_spec.getText().toString();
         dr_desc = et_bio_desc.getText().toString();
         dr_address = et_dr_city.getText().toString();
+        pmdc_no = et_pmdc_no.getText().toString();
         UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             UserId = userModelClass.getUser_id();
@@ -149,10 +153,16 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
 
 
         if (dr_spec.isEmpty()) {
-            et_dr_spec.setError("Please Enter ntn no");
+            et_dr_spec.setError("Please Enter specialization");
             valid = false;
         } else {
             et_dr_spec.setError(null);
+        }
+        if (pmdc_no.isEmpty()) {
+            et_pmdc_no.setError("Please Enter pmdc no");
+            valid = false;
+        } else {
+            et_pmdc_no.setError(null);
         }
         if (dr_address.isEmpty()) {
             et_dr_city.setError("Please Enter company address");

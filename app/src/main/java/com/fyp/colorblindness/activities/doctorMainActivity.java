@@ -16,9 +16,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.fragment.AboutUsFragment;
+import com.fyp.colorblindness.fragment.ChangePassword;
 import com.fyp.colorblindness.fragment.ContactUsFragment;
 import com.fyp.colorblindness.fragment.DoctorHomeFragment;
 import com.fyp.colorblindness.fragment.EditDrProfessionInfo;
+import com.fyp.colorblindness.fragment.FeedBackFragment;
 import com.fyp.colorblindness.fragment.UserProfile;
 import com.fyp.colorblindness.models.UserModelClass;
 import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
@@ -69,7 +71,13 @@ public class doctorMainActivity extends AppCompatActivity implements NavigationV
             getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
                     new EditDrProfessionInfo()).addToBackStack("fragment").commit();
         }
+        else if (id == R.id.nav_change_pass) {
 
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
+                    new ChangePassword()).addToBackStack("fragment").commit();
+
+        }
         else if (id == R.id.nav_profile) {
 
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -88,6 +96,13 @@ public class doctorMainActivity extends AppCompatActivity implements NavigationV
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
                     new ContactUsFragment()).addToBackStack("fragment").commit();
+
+        }
+        else if (id == R.id.nav_feedback) {
+
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.user_main_frame,
+                    new FeedBackFragment()).addToBackStack("fragment").commit();
 
         }
         else if (id == R.id.nav_logout) {

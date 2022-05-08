@@ -37,9 +37,9 @@ public class SignUpFragmentDoctor extends Fragment {
     View view;
     String IsUserExist = "isUserExist";
     private ProgressDialog pDialog;
-    EditText et_name_dr,et_comp_desc_dr,et_clinic_address_dr,et_specialization_dr ,et_mobile_dr, et_address_dr, et_email_dr, et_password_dr, et_confirm_password_dr;
+    EditText et_name_dr,et_pmdc,et_comp_desc_dr,et_clinic_address_dr,et_specialization_dr ,et_mobile_dr, et_address_dr, et_email_dr, et_password_dr, et_confirm_password_dr;
     Button registration_btn_dr;
-    String dr_type = "1", dr_name = "",dr_specialization="",dr_clinic_address="",dr_comp_ntn="",
+    String dr_type = "1", dr_name = "",dr_specialization="",dr_clinic_address="",dr_pmdc="",
             dr_comp_desc="", dr_email = "", dr_mobile = "", dr_address = "", dr_password = "", dr_confirm_password = "";
 
     @Nullable
@@ -52,6 +52,7 @@ public class SignUpFragmentDoctor extends Fragment {
     private void initialization() {
         et_name_dr = view.findViewById(R.id.dr_name);
         et_email_dr = view.findViewById(R.id.dr_email);
+        et_pmdc = view.findViewById(R.id.dr_pmdc);
         et_mobile_dr = view.findViewById(R.id.dr_mobile_number);
         et_address_dr = view.findViewById(R.id.dr_address);
         et_password_dr = view.findViewById(R.id.dr_password);
@@ -85,6 +86,7 @@ public class SignUpFragmentDoctor extends Fragment {
         dr_mobile = et_mobile_dr.getText().toString();
         dr_address = et_address_dr.getText().toString();
         dr_password = et_password_dr.getText().toString();
+        dr_pmdc = et_pmdc.getText().toString();
         dr_confirm_password = et_confirm_password_dr.getText().toString();
         dr_clinic_address=et_clinic_address_dr.getText().toString();
         dr_comp_desc=et_comp_desc_dr.getText().toString();
@@ -97,6 +99,12 @@ public class SignUpFragmentDoctor extends Fragment {
             valid = false;
         } else {
             et_name_dr.setError(null);
+        }
+        if (dr_pmdc.isEmpty()) {
+            et_pmdc.setError("Pleaase enter pmdc number");
+            valid = false;
+        } else {
+            et_pmdc.setError(null);
         }
         if (dr_specialization.isEmpty()) {
             Toast.makeText(getContext(), "Please enter specialization", Toast.LENGTH_SHORT).show();
@@ -201,6 +209,7 @@ public class SignUpFragmentDoctor extends Fragment {
                             args.putString("Mobile", dr_mobile);
                             args.putString("Name", dr_name);
                             args.putString("Address", dr_address);
+                            args.putString("pmdc", dr_pmdc);
                             args.putString("Email", dr_email);
                             args.putString("user_type", dr_type);
                             args.putString("Password", dr_password);

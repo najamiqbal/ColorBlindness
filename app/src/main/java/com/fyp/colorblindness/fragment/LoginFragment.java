@@ -114,6 +114,12 @@ View view;
         } else {
             et_email.setError(null);
         }
+        if (!t_email.matches(".+@gmail.com")) {
+            et_email.setError("only gmail.com allows");
+            valid = false;
+        } else {
+            et_email.setError(null);
+        }
 
         if (t_password.isEmpty()) {
             et_pass.setError("Please Enter Correct Password");
@@ -173,6 +179,7 @@ View view;
                                 userModelClass.setCompany_address(jsonObject.getString("doctor_city"));
                                 userModelClass.setDoctor_bio(jsonObject.getString("description"));
                                 userModelClass.setUser_type(jsonObject.getString("user_type"));
+                                userModelClass.setPmdc_no(jsonObject.getString("pmdc_no"));
 
 
                                 if (SharedPreferenceClass.getInstance(getContext()).addUserToPref(userModelClass)) {
