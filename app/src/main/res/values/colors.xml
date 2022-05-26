@@ -12,4 +12,5 @@
     <color name="colorPrimaryDark">#714793</color>
     <color name="colorAccent">#966F33</color>
     <color name="hint_text">#A8A8A8</color>
+    <color name="h_white">#FAEBFF</color>
 </resources>

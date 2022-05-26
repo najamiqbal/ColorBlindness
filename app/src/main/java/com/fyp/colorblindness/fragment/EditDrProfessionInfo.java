@@ -1,26 +1,41 @@
 package com.fyp.colorblindness.fragment;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.fyp.colorblindness.R;
 import com.fyp.colorblindness.activities.LoginSignUpActivity;
 import com.fyp.colorblindness.models.UserModelClass;
@@ -32,16 +47,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItemSelectedListener {
     View view;
-    EditText et_dr_city,et_dr_spec,et_bio_desc,et_pmdc_no;
-    String dr_profession="",dr_desc="", dr_spec="",pmdc_no,dr_address="",UserId="";
+    EditText et_dr_city,et_dr_spec,et_bio_desc;
+    String dr_profession="",dr_desc="",license_pmdc_image="", dr_spec="",dr_address="",UserId="";
     Button update_info_btn;
     private ProgressDialog pDialog;
+    private int GALLERY = 1, CAMERA = 2;
     Spinner select;
+    ImageView pmdc_img;
+    TextView update_pmdc_img;
     String updateCompany_url = "updateCompany";
 
     @Nullable
@@ -60,16 +80,105 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
         et_dr_spec=view.findViewById(R.id.dr_spec_edit);
         et_bio_desc=view.findViewById(R.id.dr_bio_edit);
         update_info_btn=view.findViewById(R.id.professioninfo_update_btn);
-        et_pmdc_no=view.findViewById(R.id.dr_pmdc_edit);
+        update_pmdc_img=view.findViewById(R.id.FrontSide);
+        pmdc_img=view.findViewById(R.id.license_pmdc);
+        pmdc_img.setOnClickListener(view1 -> {
+            showImage(userModelClass.getPmdc_no());
+        });
         BindData();
         update_info_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validate()){
-                    UpdateProfessionInfo(pmdc_no,dr_address,dr_desc, dr_spec,UserId);
+                    UpdateProfessionInfo(license_pmdc_image,dr_address,dr_desc, dr_spec,UserId);
                 }
             }
         });
+        update_pmdc_img.setOnClickListener(view1 -> {
+            showPictureDialog();
+        });
+    }
+
+
+    private void showPictureDialog() {
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getContext());
+        pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Select photo from gallery",
+                "Capture photo from camera"};
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                openGalleryImage();
+                                break;
+                            case 1:
+                                openCamera();
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
+
+    public void openGalleryImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY);
+    }
+
+    public void openCamera() {
+        try {
+            Intent takeVideoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takeVideoIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivityForResult(takeVideoIntent, CAMERA);
+            }
+        } catch (ActivityNotFoundException anfe) {
+            //display an error message
+            String errorMessage = "Your device doesn't support capturing images!";
+            Toast toast = Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY) {
+            if (data != null) {
+                Uri contentURI = data.getData();
+                try {
+
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), contentURI);
+                    pmdc_img.setImageBitmap(bitmap);
+                    license_pmdc_image=getStringImage(bitmap);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        } else if (requestCode == CAMERA) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            pmdc_img.setImageBitmap(thumbnail);
+            license_pmdc_image=getStringImage(thumbnail);
+        }
+
+
+    }
+    public String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     private void UpdateProfessionInfo(final String pmdc_no,final String dr_address, final String dr_desc, final String dr_spec, final String userId) {
@@ -134,7 +243,7 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
             et_bio_desc.setText(userModelClass.getDoctor_bio());
             et_dr_city.setText(userModelClass.getCompany_address());
             et_dr_spec.setText(userModelClass.getSpecialization());
-            et_pmdc_no.setText(userModelClass.getPmdc_no());
+            Glide.with(getContext()).load(userModelClass.getPmdc_no()).into(pmdc_img);
         }
     }
 
@@ -144,7 +253,6 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
         dr_spec = et_dr_spec.getText().toString();
         dr_desc = et_bio_desc.getText().toString();
         dr_address = et_dr_city.getText().toString();
-        pmdc_no = et_pmdc_no.getText().toString();
         UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             UserId = userModelClass.getUser_id();
@@ -158,11 +266,8 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
         } else {
             et_dr_spec.setError(null);
         }
-        if (pmdc_no.isEmpty()) {
-            et_pmdc_no.setError("Please Enter pmdc no");
-            valid = false;
-        } else {
-            et_pmdc_no.setError(null);
+        if (license_pmdc_image.isEmpty()) {
+            license_pmdc_image=userModelClass.getPmdc_no();
         }
         if (dr_address.isEmpty()) {
             et_dr_city.setError("Please Enter company address");
@@ -194,4 +299,29 @@ public class EditDrProfessionInfo extends Fragment implements AdapterView.OnItem
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    public void showImage(String imageUri) {
+        Dialog builder = new Dialog(getContext());
+        builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        builder.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                //nothing;
+            }
+        });
+
+        ImageView imageView = new ImageView(getContext());
+        //imageView.setImageURI(imageUri);
+        if (imageUri != null) {
+            Glide.with(getContext()).load(imageUri).dontAnimate().fitCenter().placeholder(R.drawable.applogo).into(imageView);
+        }
+        //Picasso.get().load(imageUri).placeholder(R.drawable.logo).into(imageView);
+        builder.addContentView(imageView, new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        builder.show();
+    }
+
 }

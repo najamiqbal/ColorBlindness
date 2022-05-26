@@ -1,5 +1,6 @@
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFF"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -148,21 +149,37 @@
                 android:layout_marginTop="10dp"
                 android:textColorHint="@color/hint_text"
                 />
-            <EditText
-                android:id="@+id/dr_pmdc"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="PMDC No"
-                android:padding="10dp"
-                android:background="@drawable/edit_text_style"
-                android:drawableLeft="@drawable/ic_message"
-                android:drawablePadding="10dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:inputType="text"
                 android:layout_marginTop="10dp"
-                android:textColorHint="@color/hint_text"
-                />
+                android:background="@color/h_white"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/FrontSide"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Upload PMDC Cartificate"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/license_pmdc"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@color/h_white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/folder"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/dr_specialization"
