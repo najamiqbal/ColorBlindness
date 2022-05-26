@@ -88,6 +88,7 @@ public class DoctorsList extends AppCompatActivity {
                         if (jsonObject.getString("status").equals("true")) {
                             pDialog.dismiss();
                             Toast.makeText(DoctorsList.this, "Report Submitted to Doctor Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
 
                         } else {
                             pDialog.dismiss();
