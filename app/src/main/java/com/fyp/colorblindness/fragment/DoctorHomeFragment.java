@@ -40,13 +40,13 @@ public class DoctorHomeFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-        UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
+      /*  UserModelClass userModelClass= SharedPreferenceClass.getInstance(getContext()).getUser();
         if (userModelClass!=null){
             String dr_id=userModelClass.getUser_id();
             if (dr_id.equals("101")){
                 dr_patients.setVisibility(View.VISIBLE);
             }
-        }
+        }*/
         dr_patients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

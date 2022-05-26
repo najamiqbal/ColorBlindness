@@ -1,6 +1,7 @@
 package com.fyp.colorblindness.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fyp.colorblindness.R;
+import com.fyp.colorblindness.activities.DoctorsList;
 import com.fyp.colorblindness.models.UserModelClass;
 import com.fyp.colorblindness.genralclasses.Constants_values;
 import com.fyp.colorblindness.genralclasses.SharedPreferenceClass;
@@ -196,7 +198,14 @@ public class ResultFragment extends Fragment {
             public void onClick(View view) {
                 answers_string=ans1+","+ans2+","+ans3+","+ans4+","+ans5+","+ans6+","+ans7+","+ans8+","+ans9+","+ans10+","+ans11+","+ans12;
                 if (total_p<70){
-                    SubmitReport(doctor_id,user_id,answers_string,report_status,result_per.getText().toString(),result_des.getText().toString());
+                   // SubmitReport(doctor_id,user_id,answers_string,report_status,result_per.getText().toString(),result_des.getText().toString());
+                    Intent intent=new Intent(getContext(), DoctorsList.class);
+                    intent.putExtra("user_id",user_id);
+                    intent.putExtra("ans",answers_string);
+                    intent.putExtra("report_status",report_status);
+                    intent.putExtra("result_per",result_per.getText().toString());
+                    intent.putExtra("result_des",result_des.getText().toString());
+                    startActivity(intent);
 
                 }else {
                     Toast.makeText(getContext(), "Your Result is Fine", Toast.LENGTH_SHORT).show();

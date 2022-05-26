@@ -33,6 +33,7 @@
         </activity>
         <activity android:name=".activities.DetectColorActivity" />
         <activity android:name=".activities.doctorMainActivity"/>
+        <activity android:name=".activities.DoctorsList"/>
     </application>
 
 </manifest>

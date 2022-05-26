@@ -59,7 +59,7 @@
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             android:layout_weight="1"
-            android:visibility="gone"
+            android:visibility="visible"
             app:cardElevation="8dp">
 
             <RelativeLayout

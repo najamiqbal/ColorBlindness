@@ -30,6 +30,7 @@
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/doctor_home_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/doctor_main_activity.xml" value="0.3625" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/doctors_list_fragment.xml" value="0.3496376811594203" />
+        <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/doctors_list_reportsend.xml" value="0.3625" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/doctors_list_viewholder.xml" value="0.25" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/edit_drbio_info_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/feedback_fragment.xml" value="0.3248407643312102" />
@@ -45,6 +46,7 @@
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/reports_list_viewholder.xml" value="0.25" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/resetpassword_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/result_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/send_report_doctors_list_viewholder.xml" value="0.3625" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/signup_docotr_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/singup_fragment_patient.xml" value="0.3625" />
         <entry key="..\:/Users/Black Panther/AndroidStudioProjects/ColorBlindness/app/src/main/res/layout/singup_fragment_user.xml" value="0.3625" />
